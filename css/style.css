@@ -1,0 +1,324 @@
+/* public/css/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/* public/css/style.css */
+
+:root {
+    /* Colores (Estimados con el color picker de la imagen) */
+    --color-sidebar-bg: #212529;   /* Gris oscuro para la barra lateral */
+    --color-main-bg: #2C2C2C;      /* Gris más claro para el fondo principal y navbar */
+    --color-text-light: #f8f9fa;   /* Blanco para texto principal */
+    --color-text-muted: #adb5bd;   /* Gris claro para texto secundario/hover */
+    --color-red-arrow: #dc3545;    /* Para la flecha roja en la imagen */
+
+    /* Tipografía */
+    --font-family-base: 'Roboto', sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+
+    /* Anchos de la sidebar */
+    --sidebar-width-expanded: 15rem; /* Ancho de la barra lateral expandida */
+    --sidebar-width-minimized: 4rem; /* Ancho de la barra lateral minimizada (solo iconos) */
+}
+
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--color-main-bg); /* Fondo principal del cuerpo */
+    color: var(--color-text-light); /* Color de texto por defecto */
+    overflow-x: hidden; /* Evita scroll horizontal en el body */
+}
+
+/* Base del Layout */
+#wrapper {
+    display: flex;
+    min-height: 100vh; /* Asegura que el wrapper ocupe toda la altura de la ventana */
+    width: 100%; /* Asegura que el wrapper ocupe todo el ancho */
+}
+
+/* Estilos de la Sidebar */
+#sidebar-wrapper {
+    background-color: var(--color-sidebar-bg) !important;
+    min-height: 100vh;
+    width: var(--sidebar-width-expanded); /* Ancho completo por defecto en desktop */
+    transition: width .25s ease-out; /* Transición suave para animaciones de ancho */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3); /* Sombra sutil para darle profundidad */
+    z-index: 1000; /* Asegura que esté por encima del contenido principal */
+    flex-shrink: 0; /* Previene que la sidebar se encoja */
+    margin-left: 0; /* Visible por defecto en desktop */
+    display: flex; /* Para que flex-direction: column funcione */
+    flex-direction: column; /* Para que el footer se pegue abajo */
+}
+
+#sidebar-wrapper .sidebar-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 56px; /* Altura similar al navbar para alineación visual */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#sidebar-wrapper .sidebar-brand {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Evita que el texto del brand se rompa */
+}
+
+#sidebar-wrapper .sidebar-brand .fas {
+    font-size: 1.5rem;
+}
+
+#sidebar-wrapper .list-group-flush {
+    flex-grow: 1; /* Permite que la lista de opciones ocupe el espacio restante */
+}
+
+#sidebar-wrapper .list-group-item {
+    background-color: var(--color-sidebar-bg) !important;
+    color: var(--color-text-light) !important;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap; /* Evita que el texto de los ítems se rompa */
+}
+
+#sidebar-wrapper .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--color-text-light) !important;
+}
+
+#sidebar-wrapper .list-group-item .fas {
+    min-width: 2rem; /* Asegura un espacio fijo para los íconos */
+    text-align: center;
+}
+
+/* Botón de Toggle dentro de la Sidebar (Desktop) */
+#sidebar-wrapper #sidebar-toggle-desktop {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--color-text-light);
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#sidebar-wrapper #sidebar-toggle-desktop:focus {
+    box-shadow: none;
+}
+
+/* Estilos del Contenido Principal de la Página */
+#page-content-wrapper {
+    flex-grow: 1; /* Permite que el contenido se expanda y ocupe el espacio disponible */
+    width: 100%; /* Por defecto, ocupa el 100% del espacio disponible en el flex container */
+    transition: margin-left .25s ease-out, width .25s ease-out; /* Transición suave para el cambio de ancho y margen */
+}
+
+/* Navbar superior */
+.navbar {
+    background-color: var(--color-main-bg) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+    color: var(--color-text-light) !important;
+}
+
+/* Ocultar el botón de toggle móvil por defecto en desktop */
+#sidebar-toggle-mobile {
+    display: none;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    /* Asegurar que los ítems del footer se comporten como los de la lista principal */
+    display: flex;
+    flex-direction: column; /* Para apilar los elementos */
+}
+
+.sidebar-footer .list-group-item {
+    background-color: var(--color-sidebar-bg) !important;
+    color: var(--color-text-light) !important;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.sidebar-footer .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--color-text-light) !important;
+}
+
+/* NUEVO: Reglas para el texto del usuario en el footer para evitar desbordamiento */
+.sidebar-footer .list-group-item .sidebar-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/* ------------------------------------------------------------------------------------------------
+   Clase 'toggled-desktop' para la barra lateral minimizada (solo en desktop)
+------------------------------------------------------------------------------------------------ */
+@media (min-width: 768px) {
+    #wrapper.toggled-desktop #sidebar-wrapper {
+        width: var(--sidebar-width-minimized); /* Ancho reducido para solo mostrar iconos */
+    }
+
+    #wrapper.toggled-desktop #sidebar-wrapper .sidebar-text {
+        display: none; /* Oculta el texto */
+    }
+
+    #wrapper.toggled-desktop #sidebar-wrapper .sidebar-brand .fas {
+        margin-right: 0 !important;
+    }
+
+    #wrapper.toggled-desktop #sidebar-wrapper .sidebar-header {
+        justify-content: center; /* Centra el icono del toggle */
+    }
+
+    #wrapper.toggled-desktop #sidebar-wrapper .list-group-item {
+        justify-content: center; /* Centra el contenido (iconos) de los ítems */
+        padding-left: 0.5rem; /* Ajuste de padding para centrado visual */
+        padding-right: 0.5rem; /* Ajuste de padding para centrado visual */
+    }
+
+    #wrapper.toggled-desktop #sidebar-wrapper .sidebar-footer .list-group-item {
+        justify-content: center; /* Centra el contenido (iconos) de los ítems del footer */
+    }
+
+    #wrapper.toggled-desktop #page-content-wrapper {
+        /* Cuando sidebar está minimizada, el contenido se expande para llenar el espacio restante */
+        width: calc(100vw - var(--sidebar-width-minimized));
+        margin-left: var(--sidebar-width-minimized); /* Mueve el contenido para que no se superponga */
+    }
+}
+
+/* ------------------------------------------------------------------------------------------------
+   Media Queries para Responsividad (Comportamiento en Móviles)
+------------------------------------------------------------------------------------------------ */
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 767.98px) {
+    /* Sidebar en móvil: oculta por defecto y se superpone */
+    #sidebar-wrapper {
+        width: var(--sidebar-width-expanded); /* Ancho completo por defecto en móvil */
+        position: fixed; /* Superpone el contenido */
+        top: 0;
+        left: 0;
+        z-index: 1030;
+        overflow-y: auto;
+        transform: translateX(-100%); /* Oculta la sidebar completamente fuera de la vista */
+        transition: transform .25s ease-out; /* Transición para el deslizamiento */
+    }
+
+    /* El texto siempre visible en móvil cuando la sidebar está abierta */
+    #sidebar-wrapper .sidebar-text {
+        display: inline;
+    }
+
+    /* Ajustes para el brand y header en móvil */
+    #sidebar-wrapper .sidebar-brand .fas {
+        margin-right: .5rem !important;
+    }
+    #sidebar-wrapper .sidebar-header {
+        justify-content: space-between;
+    }
+
+    /* Contenido de la página en móvil */
+    #page-content-wrapper {
+        width: 100vw; /* Ocupa todo el ancho en móviles */
+        margin-left: 0; /* No hay margen inicial */
+        transition: margin-left .25s ease-out, width .25s ease-out; /* Transición para el margen si se empuja */
+    }
+
+    /* Mostrar el botón de toggle móvil en el navbar */
+    #sidebar-toggle-mobile {
+        display: block;
+        margin-right: 1rem;
+    }
+
+    /* Ocultar el botón de toggle de desktop en móvil */
+    #sidebar-toggle-desktop {
+        display: none !important;
+    }
+
+    /* Cuando la sidebar está 'toggled-mobile' (visible y expandida) */
+    #wrapper.toggled-mobile #sidebar-wrapper {
+        transform: translateX(0); /* Muestra la sidebar deslizándose desde la izquierda */
+    }
+
+    /* Cuando la sidebar está 'toggled-mobile', el contenido principal se mueve */
+    #wrapper.toggled-mobile #page-content-wrapper {
+        margin-left: var(--sidebar-width-expanded); /* Empuja el contenido principal */
+        width: calc(100vw - var(--sidebar-width-expanded)); /* Reduce el ancho del contenido principal */
+    }
+
+    /* Asegurarse de que la clase toggled-desktop no interfiera en móvil.
+       Si #wrapper tiene toggled-desktop, en móvil, no debe aplicar transform: translateX(-100%).
+       La lógica mobile debe prevalecer.
+       Eliminamos la regla de transform: translateX(-100%) para toggled-desktop en móvil,
+       ya que la regla por defecto de #sidebar-wrapper ya oculta la sidebar.
+       Esto permite que toggled-mobile la muestre correctamente.
+    */
+   
+    /* Asegurarse de que el texto y la alineación sean correctos si toggled-desktop está activo en móvil */
+    #wrapper.toggled-desktop #sidebar-wrapper .sidebar-text {
+        display: inline;
+    }
+    #wrapper.toggled-desktop #sidebar-wrapper .sidebar-brand .fas {
+        margin-right: .5rem !important;
+    }
+    #wrapper.toggled-desktop #sidebar-wrapper .sidebar-header {
+        justify-content: space-between;
+    }
+    #wrapper.toggled-desktop #sidebar-wrapper .list-group-item,
+    #wrapper.toggled-desktop #sidebar-wrapper .sidebar-footer .list-group-item {
+        justify-content: flex-start;
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    /* Centrar los iconos del footer en móvil cuando la sidebar está visible */
+    #wrapper.toggled-mobile .sidebar-footer .list-group-item {
+        justify-content: center; /* Centra los iconos cuando la sidebar móvil está abierta */
+        padding-left: 0.5rem; /* Ajuste de padding para centrado visual */
+        padding-right: 0.5rem; /* Ajuste de padding para centrado visual */
+    }
+    /* El texto del footer también debe ocultarse si la sidebar está minimizada en móvil */
+    #wrapper:not(.toggled-mobile) .sidebar-footer .list-group-item .sidebar-text {
+        display: none;
+    }
+
+
+    /* Asegurarse de que page-content-wrapper siempre toma el 100% de width en móvil si no está toggled */
+    #wrapper:not(.toggled-mobile) #page-content-wrapper {
+        width: 100vw;
+        margin-left: 0;
+    }
+}
+
+/* Grid de 3x3 (Ajustado para 1 columna en móvil) */
+.grid-3x3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 992px) {
+    .grid-3x3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767.98px) { /* En móvil, una sola columna */
+    .grid-3x3 {
+        grid-template-columns: 1fr;
+    }
+}
