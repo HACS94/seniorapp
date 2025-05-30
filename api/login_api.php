@@ -3,25 +3,7 @@
 
 // 1. Iniciar sesión: Crucial para almacenar información del usuario si el login es exitoso
 session_start();
-
-// 2. Datos de conexión a la base de datos (para pruebas locales)
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root'); // ¡CAMBIA ESTO! Ej: 'root'
-define('DB_PASSWORD', ''); // ¡CAMBIA ESTO! Ej: '' (vacío para XAMPP/WAMP por defecto)
-define('DB_NAME', 'seniorappbbdd');
-
-// 3. Intenta establecer una conexión a la base de datos MySQL
-$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-// Verifica la conexión
-if ($conn->connect_error) {
-    // Si hay un error de conexión, guarda el mensaje en sesión y redirige al login
-    $_SESSION['login_message'] = "Error de conexión a la base de datos: " . $conn->connect_error;
-    $_SESSION['message_type'] = "danger";
-    header("Location: ../login.php"); // Asegúrate que esta ruta es correcta
-    exit();
-}
-$conn->set_charset("utf8mb4");
+require_once '../includes/db_connection.php'; // Incluir la conexión compartida
 
 // 4. Verificar que la solicitud sea POST (el formulario de login envía datos por POST)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
